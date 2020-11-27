@@ -1,0 +1,37 @@
+In the MM_TM directory, the source code to perform matrix-matrix
+multiplication with shared and distributed memory as well as on GPUs
+is provided. The necessary libraries and compilers are provided,
+except for the gcc compiler (version 9.2.0). In all cases, MPI wrappers
+are used to compile the code (mpich-3.3.2/bin/mpic++). Open this
+wrapper and change the definitions at the beginning of the file to
+point to your gcc compiler and libraries. Executables for each type of
+matrix-matrix multiplication are given.
+
+1) Shared memory
+
+Compile this code with make OMP_code. An executable with this name
+will be created
+
+Set the number of threads you want to use with setenv OMP_NUM_THREADS N,
+where N is the number of threads (1, 2, 4, ...)
+
+Start the code with ./OMP_code M, where M is the size of the A and B
+matrices that will be multiplied with each other
+
+2) Distributed memory
+
+Compile the code with make MPI_code. An executable with this name will
+be created
+
+Start the code with ./mpich-3.3.2/bin/mpiexec -n N ./MPI_code M, where
+N is the number of mpi ranks that you want to use and M the size of
+the matrices A and B that will be multiplied
+
+3) GPU
+
+Compile the code with make CUDA_code. An executable with the same name
+will be created. The machine you are compiling your code on should be
+equipped with a GPU, preferably of the P100 generation and later
+
+Start the code on a machine with GPU with ./CUDA_code M, where M is
+the size of the matrices A and B that will be multiplied with each other.
